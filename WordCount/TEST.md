@@ -6,8 +6,9 @@ många ord som är unika i den.
 ## Testlista
 
 - Tom sträng returnerar 0
-- Ett enda ord returnear 1
-- Flera ord returneas antalet ord
+- Null-sträng returnerar 0
+- Ett enda ord returnerar 1
+- Flera ord returneras antalet ord
 - Flera av samma ord returneras 1
 - Både flera ord och några av samma ord returneras det unika antalet ord
 - Gemener och versaler skall inte spela roll - det tolkas som samma ord
