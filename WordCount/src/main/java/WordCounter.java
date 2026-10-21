@@ -7,14 +7,15 @@ public class WordCounter {
         Set<String> words = new HashSet<>();
 
 
-        if(!s.isEmpty()){
-            for (String word : s.split(" ")){
-                words.add(word);
-            }
-           return words.size();
+        if(s == null || s.isEmpty()){
+            return 0;
         }
 
-        return 0;
+        for(String word: s.toLowerCase().split(" ")){
+            words.add(word);
+        }
+
+        return words.size();
 
     }
 }

@@ -47,6 +47,13 @@ public class WordCounterTest {
     }
 
     @Test
+    @DisplayName("0 on NULL-String")
+    public void nullStringReturnsZero() {
+        int result = wordCounter.countWords(null);
+        assertEquals(0,result);
+    }
+
+    @Test
     @DisplayName("multiple of the same word returns 1")
     public void multipleOfTheSameWordReturnsTheNumberOfWords() {
 
