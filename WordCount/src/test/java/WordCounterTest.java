@@ -50,7 +50,9 @@ public class WordCounterTest {
     @DisplayName("multiple of the same word returns 1")
     public void multipleOfTheSameWordReturnsTheNumberOfWords() {
 
+        int result = wordCounter.countWords("uniqueWord uniqueWord uniqueWord");
 
+        assertEquals(1,result);
     }
 
 
