@@ -1,3 +1,5 @@
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -7,12 +9,19 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class WordCounterTest {
 
+    WordCounter wordCounter = null;
+    @BeforeEach
+    void beforeAll(){
+        this.wordCounter = new WordCounter();
+    }
+
+
+
     @Test
     @DisplayName("0 on empty string")
 //    @ParameterizedTest
 //    @ValueSource(strings = {"", ""})
     public void emptyStringReturnsZero() {
-        WordCounter wordCounter = new WordCounter();
 
         int result = wordCounter.countWords("");
 
@@ -23,7 +32,6 @@ public class WordCounterTest {
     @Test
     @DisplayName("1 word returns 1")
     public void oneWordReturnsOne() {
-        WordCounter wordCounter = new WordCounter();
 
         int result = wordCounter.countWords("oneWord");
 
@@ -33,9 +41,16 @@ public class WordCounterTest {
     @Test
     @DisplayName("3 words returns 3")
     public void multipleWordReturnsTheNumberOfWords() {
-        WordCounter wordCounter = new WordCounter();
+
         int result = wordCounter.countWords("wordOne, wordTwo, wordThree");
         assertEquals(3,result);
+    }
+
+    @Test
+    @DisplayName("multiple of the same word returns 1")
+    public void multipleOfTheSameWordReturnsTheNumberOfWords() {
+
+
     }
 
 
