@@ -12,7 +12,7 @@ public class WordCounter {
         }
 
         for(String word: s.toLowerCase().split(" ")){
-            words.add(word);
+            words.add(word.toLowerCase());
         }
 
         return words.size();

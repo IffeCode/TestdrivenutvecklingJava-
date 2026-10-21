@@ -62,6 +62,21 @@ public class WordCounterTest {
         assertEquals(1,result);
     }
 
+    @Test
+    @DisplayName("2 of the same word and one uniqueWord should return 2")
+    public void twoSameWordAndOneUniqueWordReturnsTheNumberOfWords() {
+        int result = wordCounter.countWords("oneWord oneWord uniqueWord");
+
+        assertEquals(2,result);
+    }
+
+    @Test
+    @DisplayName("upper and lowercase letter should not impact unique words")
+    public void upperAndLowercaseLetterShouldNotImpactUniqueWords() {
+        int result = wordCounter.countWords("UniqueWord uniqueWord UNIqueWord uniqueword");
+        assertEquals(1,result);
+    }
+
 
 
 }
