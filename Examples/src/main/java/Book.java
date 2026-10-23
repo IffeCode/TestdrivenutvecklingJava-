@@ -1,5 +1,24 @@
 public class Book {
 
-    public Book(String dungeonCrawlerCarl, String mattDinniman, int i) {
+    private String title;
+    private String author;
+    private int publicationYear;
+
+    public Book(String title, String author, int publicationYear) {
+        this.title = title;
+        this.author = author;
+        this.publicationYear = publicationYear;
+    }
+
+    public String getTitle() {
+        return this.title;
+    }
+
+    public String getAuthor() {
+        return this.author;
+    }
+
+    public int getPublicationDate() {
+        return this.publicationYear;
     }
 }
