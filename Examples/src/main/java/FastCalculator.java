@@ -4,4 +4,9 @@ public class FastCalculator implements Calculator {
     public boolean isOdd(int number) {
         return number % 2 != 0;
     }
+
+    @Override
+    public int add(int a, int b) {
+        return a+b;
+    }
 }
