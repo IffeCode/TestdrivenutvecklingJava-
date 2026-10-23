@@ -1,3 +1,5 @@
+package se.grit;
+
 public class FastCalculator implements Calculator {
 
     @Override

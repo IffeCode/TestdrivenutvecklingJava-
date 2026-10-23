@@ -1,3 +1,5 @@
+package se.grit;
+
 public class SafeCalculator implements Calculator {
 
     @Override

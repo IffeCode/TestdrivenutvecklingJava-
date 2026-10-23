@@ -1,3 +1,5 @@
+package se.grit;
+
 import org.jspecify.annotations.Nullable;
 import org.junit.jupiter.api.extension.*;
 
@@ -14,8 +16,8 @@ public class TestInvocationProvider implements TestTemplateInvocationContextProv
     @Override
     public Stream<TestTemplateInvocationContext> provideTestTemplateInvocationContexts(ExtensionContext context) {
         return Stream.of(
-                invocation("FastCalculator", new FastCalculator()),
-                invocation("SafeCalculator", new SafeCalculator())
+                invocation("se.grit.FastCalculator", new FastCalculator()),
+                invocation("se.grit.SafeCalculator", new SafeCalculator())
         );
     }
 
