@@ -89,7 +89,18 @@ public class MockTestingExamples {
         doAnswer(new Answer<Boolean>() {
             @Override
             public Boolean answer(InvocationOnMock invocationOnMock) throws Throwable {
-                return null;
+                long productId = invocationOnMock.getArgument(0);
+                int quantity = invocationOnMock.getArgument(1);
+
+                if (productId == 4){
+                    return quantity <= 1;
+                }
+                if (productId == 2){
+                    return quantity <= 3;
+                }
+
+                return false;
+
             }
         });
 
