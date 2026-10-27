@@ -1,0 +1,99 @@
+package org.example;
+
+import org.junit.jupiter.api.Test;
+import org.mockito.invocation.InvocationOnMock;
+import org.mockito.stubbing.Answer;
+
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.mockito.Mockito.*;
+
+public class MockTestingExamples {
+
+    @Test
+    public void testPlaceOrderWithoutMockito(){
+
+        //Assemble
+        OrderService orderService = new OrderService(new InventoryService() {
+            @Override
+            public Boolean checkAvailability(long productId, int quantity) {
+                return true;
+            }
+        });
+
+
+        //Act
+        Boolean response = orderService.placeOrder(4,12);
+
+        //Assert
+        assertTrue(response);
+
+    }
+
+    @Test
+    public void testPlaceOrderWithoutMockitoFunctionInterface(){
+        OrderService orderService = new OrderService((long productId, int quantity) -> true);
+
+        Boolean response = orderService.placeOrder(4,12);
+        assertTrue(response);
+
+    }
+
+    @Test
+    public void testOrderServiceCheckAvailability(){
+        // 1. Skapa en mock-instans av InventoryService
+        InventoryService inventoryService = mock(InventoryService.class);
+
+        // 2. Definiera mockens beteende
+        when(inventoryService.checkAvailability(4,33))
+                .thenReturn(true);
+        when(inventoryService.checkAvailability(4,50))
+                .thenReturn(true);
+
+        // 3. Skapa en instans av order servicen och injicera mocken
+        OrderService orderService = new OrderService(inventoryService);
+
+        // 4. Anropar kod under test och kontrollerar beteendet
+        assertTrue(orderService.placeOrder(4,33));
+        assertTrue(orderService.placeOrder(4,50));
+
+        // 5. Kontrollera at metoder i mocken har blivit anropade
+        verify(inventoryService, times(1)).checkAvailability(4,33);
+        verify(inventoryService, times(1)).checkAvailability(4,50);
+        verify(inventoryService, never()).checkAvailability(1,1);
+    }
+
+    @Test
+    public void testExceptionFromInventoryService(){
+
+        //Arrange
+        InventoryService inventoryService = mock(InventoryService.class);
+        doThrow(new RuntimeException("Invalid ID!"))
+                .when(inventoryService).checkAvailability(-1,2);
+
+        OrderService orderService = new OrderService(inventoryService);
+
+        //Act & Assert
+        assertThrows(
+                RuntimeException.class,
+                () -> orderService.placeOrder(-1,2)
+        );
+
+    }
+
+    @Test
+    public void advancedMockResponseWithDoAnswer(){
+        //Arrange
+        OrderService orderService = mock(OrderService.class);
+
+        doAnswer(new Answer<Boolean>() {
+            @Override
+            public Boolean answer(InvocationOnMock invocationOnMock) throws Throwable {
+                return null;
+            }
+        });
+
+    }
+
+
+}
