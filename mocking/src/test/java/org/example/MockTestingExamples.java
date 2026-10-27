@@ -1,6 +1,7 @@
 package org.example;
 
 import org.junit.jupiter.api.Test;
+import org.mockito.MockedStatic;
 import org.mockito.invocation.InvocationOnMock;
 import org.mockito.stubbing.Answer;
 
@@ -108,6 +109,20 @@ public class MockTestingExamples {
         assertTrue(orderService.placeOrder(2,3));
         assertFalse(orderService.placeOrder(4,11));
         assertFalse(orderService.placeOrder(1,11));
+
+    }
+
+    @Test
+    public void exampleStaticTesting(){
+
+        try(MockedStatic<MathUtil> mockedStaticMathUtils = mockStatic(MathUtil.class)) {
+
+            mockedStaticMathUtils.when(() -> MathUtil.isPrime(7)).thenReturn(true);
+            mockedStaticMathUtils.when(() -> MathUtil.isPrime(8)).thenReturn(false);
+
+            assertTrue(MathUtil.isPrime(7));
+
+        }
 
 
     }
