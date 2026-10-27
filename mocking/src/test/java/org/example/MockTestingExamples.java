@@ -123,7 +123,7 @@ public class MockTestingExamples {
             assertTrue(MathUtil.isPrime(7));
             assertFalse(MathUtil.isPrime(8));
 
-            mockedStaticMathUtils.verify(() -> MathUtil.isPrime(7));
+            mockedStaticMathUtils.verify(() -> MathUtil.isPrime(7), times(1));
 
         }
 
