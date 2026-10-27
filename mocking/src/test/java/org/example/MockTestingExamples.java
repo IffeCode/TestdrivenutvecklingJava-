@@ -124,6 +124,7 @@ public class MockTestingExamples {
             assertFalse(MathUtil.isPrime(8));
 
             mockedStaticMathUtils.verify(() -> MathUtil.isPrime(7), times(1));
+            mockedStaticMathUtils.verify(() -> MathUtil.isPrime(8));
 
         }
 
