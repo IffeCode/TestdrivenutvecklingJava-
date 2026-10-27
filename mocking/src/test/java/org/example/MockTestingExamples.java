@@ -4,8 +4,7 @@ import org.junit.jupiter.api.Test;
 import org.mockito.invocation.InvocationOnMock;
 import org.mockito.stubbing.Answer;
 
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 public class MockTestingExamples {
@@ -84,7 +83,7 @@ public class MockTestingExamples {
     @Test
     public void advancedMockResponseWithDoAnswer(){
         //Arrange
-        OrderService orderService = mock(OrderService.class);
+        InventoryService inventoryService = mock(InventoryService.class);
 
         doAnswer(new Answer<Boolean>() {
             @Override
@@ -93,7 +92,7 @@ public class MockTestingExamples {
                 int quantity = invocationOnMock.getArgument(1);
 
                 if (productId == 4){
-                    return quantity <= 1;
+                    return quantity <= 10;
                 }
                 if (productId == 2){
                     return quantity <= 3;
@@ -102,7 +101,14 @@ public class MockTestingExamples {
                 return false;
 
             }
-        });
+        }).when(inventoryService).checkAvailability(anyLong(), anyInt());
+        OrderService orderService =  new OrderService(inventoryService);
+
+        assertTrue(orderService.placeOrder(4,6));
+        assertTrue(orderService.placeOrder(2,3));
+        assertFalse(orderService.placeOrder(4,11));
+        assertFalse(orderService.placeOrder(1,11));
+
 
     }
 
