@@ -38,6 +38,7 @@ public class CheckoutService {
 
         //Skicka notifikation
 
+
         return  new Receipt(paymentId, total);
 
     }
