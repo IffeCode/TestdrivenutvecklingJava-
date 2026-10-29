@@ -1,8 +1,12 @@
 package org.example.hexdemo.adapter.web;
 
+import jakarta.validation.Valid;
 import jakarta.validation.constraints.*;
-import org.example.hexdemo.domain.model.ProductId;
+import org.example.hexdemo.domain.model.*;
 import org.example.hexdemo.domain.service.CheckoutService;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -19,7 +23,28 @@ public class CheckoutController {
         this.checkoutService = checkoutService;
     }
 
+    @PostMapping
+    public ResponseEntity<Receipt> checkout(@Valid @RequestBody CheckoutRequest checkoutRequest) {
 
+        var cart = new Cart(
+                checkoutRequest.items.stream().map(
+                        i -> new CartItem(
+                              new ProductId(i.productId),
+                              new Money(i.unitPrice),
+                              i.quantity
+                        )
+                ).toList()
+        );
+
+        var customer = new  Customer(
+                new CustomerId(checkoutRequest.customerId),
+                checkoutRequest.email
+        );
+
+        return ResponseEntity.ok(checkoutService.checkout(cart, customer));
+
+
+    }
 
 
     public static class CheckoutRequest {
@@ -31,7 +56,7 @@ public class CheckoutController {
         public String email;
 
         @NotEmpty(message = "Cannot be empty")
-        public List<Item> itemns;
+        public List<Item> items;
 
         public static  class Item {
             @NotBlank
