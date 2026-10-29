@@ -13,7 +13,8 @@ public class CheckoutService {
     private final Inventory inventory;
     private final PaymentProcessor paymentProcessor;
 
-    public CheckoutService(PricingPolicy pricingPolicy, Inventory inventory, PaymentProcessor paymentProcessor) {
+    public CheckoutService(PricingPolicy pricingPolicy, Inventory inventory,
+                           PaymentProcessor paymentProcessor) {
         this.pricingPolicy = pricingPolicy;
         this.inventory = inventory;
         this.paymentProcessor = paymentProcessor;
