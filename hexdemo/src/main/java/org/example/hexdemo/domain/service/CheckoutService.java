@@ -4,10 +4,17 @@ import org.example.hexdemo.domain.model.Cart;
 import org.example.hexdemo.domain.model.Customer;
 import org.example.hexdemo.domain.model.Money;
 import org.example.hexdemo.domain.model.Receipt;
+import org.example.hexdemo.domain.port.PricingPolicy;
 
 import java.math.BigDecimal;
 
 public class CheckoutService {
+
+    private final PricingPolicy pricingPolicy;
+
+    public CheckoutService(PricingPolicy pricingPolicy) {
+        this.pricingPolicy = pricingPolicy;
+    }
 
     public Receipt checkout(Cart cart, Customer customer){
 
