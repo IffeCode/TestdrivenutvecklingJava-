@@ -19,7 +19,7 @@ public class CheckoutService {
     public Receipt checkout(Cart cart, Customer customer){
 
         //Total price?
-
+        Money total = pricingPolicy.priceFor(cart, customer);
 
         //Boka produkter på lager
 
