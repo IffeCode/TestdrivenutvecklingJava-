@@ -5,6 +5,6 @@ import org.example.hexdemo.domain.model.Money;
 
 public interface Notifier {
 
-    void orderConfirmation(String paymentId, CustomerId customerId);
+    void orderConfirmation(String paymentId, CustomerId customer);
 
 }

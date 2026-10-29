@@ -41,6 +41,7 @@ public class CheckoutService {
         String paymentId = paymentProcessor.charge(customer.id(), total);
 
         //Skicka notifikation
+        notifier.orderConfirmation(paymentId, customer.id());
 
 
         return  new Receipt(paymentId, total);
