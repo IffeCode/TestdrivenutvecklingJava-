@@ -34,7 +34,7 @@ public class CheckoutService {
         }
 
         //Ta betalt via betalningsleverantör
-
+        String paymentId = paymentProcessor.charge(customer.id(), total);
 
         //Skicka notifikation
 
