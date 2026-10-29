@@ -23,7 +23,10 @@ public class CheckoutService {
 
         //Boka produkter på lager
         for (CartItem ci: cart.items()){
-            inventory.reserve(ci.productId(), ci.quantity());
+            if (!inventory.reserve(ci.productId(), ci.quantity())){
+                throw new IllegalStateException("Cannot reserve product " + ci.productId()
+                        + " with quantity " + ci.quantity());
+            }
         }
 
         //Ta betalt via betalningsleverantör
