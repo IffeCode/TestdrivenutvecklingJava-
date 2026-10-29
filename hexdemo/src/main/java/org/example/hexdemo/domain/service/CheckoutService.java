@@ -2,6 +2,7 @@ package org.example.hexdemo.domain.service;
 
 import org.example.hexdemo.domain.model.*;
 import org.example.hexdemo.domain.port.Inventory;
+import org.example.hexdemo.domain.port.Notifier;
 import org.example.hexdemo.domain.port.PaymentProcessor;
 import org.example.hexdemo.domain.port.PricingPolicy;
 
@@ -12,12 +13,15 @@ public class CheckoutService {
     private final PricingPolicy pricingPolicy;
     private final Inventory inventory;
     private final PaymentProcessor paymentProcessor;
+    private final Notifier notifier;
 
     public CheckoutService(PricingPolicy pricingPolicy, Inventory inventory,
-                           PaymentProcessor paymentProcessor) {
+                           PaymentProcessor paymentProcessor,
+                           Notifier notifier) {
         this.pricingPolicy = pricingPolicy;
         this.inventory = inventory;
         this.paymentProcessor = paymentProcessor;
+        this.notifier = notifier;
     }
 
     public Receipt checkout(Cart cart, Customer customer){
