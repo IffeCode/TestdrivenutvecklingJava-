@@ -29,7 +29,7 @@ public class CheckoutService {
 
         //Skicka notifikation
 
-        return  new Receipt("xxx", new Money(BigDecimal.ONE));
+        return  new Receipt("xxx", total);
 
     }
 
